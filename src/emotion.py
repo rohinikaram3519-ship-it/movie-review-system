@@ -3,7 +3,7 @@ from transformers import pipeline
 emotion_model = pipeline(
     "text-classification",
     model="j-hartmann/emotion-english-distilroberta-base",
-    top_k=None   # gives all emotions
+    top_k=None
 )
 
 def detect_emotion(text):
@@ -11,6 +11,6 @@ def detect_emotion(text):
     
     emotions = {}
     for item in results:
-        emotions[item['label']] = round(item['score'])
+        emotions[item['label']] = int(item['score'] * 100)
     
     return emotions
